@@ -17,8 +17,6 @@
                             <label for="text_novo_utente"><strong>Novo Utente:</strong></label>
                             <input type="text" name="nome" id="nome" class="form-control" placeholder="nome" value="{{old('nome')}}">
                             <input type="text" name="morada" id="morada" class="form-control" placeholder="morada" value="{{old('morada')}}">
-                            {{-- <input type="text" name="genero" id="genero" class="form-control" placeholder="genero" value="{{old('genero')}}"> --}}
-                            {{-- <label for="select_genero">Género: </label> --}}
                             <select class="custom-select" name="genero" id="genero" value="{{old('genero')}}">
                                 <option value=""disabled selected>Selecione o género:</option>
                                 <option value="Feminino">Feminino</option>
