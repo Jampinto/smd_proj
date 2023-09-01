@@ -308,19 +308,15 @@ class UtenteController extends Controller
  
     }
 
-    public function envioEmails(){
+    public function envioEmails($id){
         
-        $utente = Utente::all();
-
-        foreach ($utente as $utente){
-            $consultas = $utente->consultas;
-            $consultasMedicas = ConsultaMedica::whereIn('id_consulta', $consultas->pluck('id'))->get();
-
-
-            Mail::to($utente->email)->send(new EmailSmd($utente, $consultas, $consultasMedicas));
-        }
-
-        
+        $utente = Utente::findOrFail($id);
+  
+        $consultas = $utente->consultas;
+        $consultasMedicas = ConsultaMedica::whereIn('id_consulta', $consultas->pluck('id'))->get();
+            
+        Mail::to($utente->email)->send(new EmailSmd($utente, $consultas, $consultasMedicas));
+                  
         return 'E-mail enviado com sucesso!';
     }
 

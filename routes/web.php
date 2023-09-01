@@ -43,7 +43,7 @@ Route::post('/registar_medicina_submit', 'utentecontroller@registar_medicina_sub
 Route::get('/ver_consulta{id}', 'utentecontroller@ver_consulta') -> name('ver_consulta');
 
 //EMAIL
-Route::get('/mail', 'utentecontroller@envioEmails') -> name('envio_emails');
+Route::get('/mail/{id}', 'utentecontroller@envioEmails') -> name('envio_emails');
 
 Route::get('/temp', 'main@temp'); 
 //Route::get('usuarios_login', 'usuariosController@ApresentarFormularioLogin');
