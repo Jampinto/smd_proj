@@ -9,9 +9,7 @@
             <br>
             <h3 class ="text-center mb-4">Consulta Enfermagem</h3>
             <hr>
-
             <h5 class="text-left">{{$utente->nome}}</h5>
-
             <table class="table table-striped">
                 <thead class= "thead-dark">
                     <tr>
@@ -23,9 +21,7 @@
                         <th>PAD (mmHg)</th>
                         <th>Pressão Arterial</th>
                     </tr>
-
                 </thead>
-
                 <tbody>
                     <tr>
                         @foreach($consultas as $consulta)
@@ -50,7 +46,6 @@
         <hr>
         <div class="row justify-content-center">
             <div class="col-sm-6 text-center">
-                {{-- col-sm-2 offset-sm-2 --}}
                 <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -70,13 +65,11 @@
                         <td>{{$consultamedica->comentarios}}</td>
                     </tr>
                     @endforeach
-
                 </tbody>
                 </table>
             </div>    
         </div>
 </div>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col d-flex justify-content-center align-items-center">
@@ -86,9 +79,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 @endsection

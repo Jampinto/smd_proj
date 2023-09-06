@@ -10,12 +10,9 @@
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
 </head>
 <body>
+
     @yield('content')
-    {{-- @include('userbar') --}}
-   
-
-
-    
     <script src="{{asset('assets/bootstrap/js_bootstrap.bundle.min.js')}}"></script>
+    
 </body>
 </html>

@@ -33,7 +33,6 @@ class UtenteController extends Controller
         // $utente->save();
         // dd($utente);
 
-
         // delete
         // $utente = Utente::find(2);
         // $utente->delete();
@@ -46,19 +45,6 @@ class UtenteController extends Controller
         // $utentes = Utente::all();
         // $utentes = Utente::orderBy('created_at', 'desc')->get();
 
-        // $utentes = Utente::leftJoin('consultas', 'utentes.id', '=', 'consultas.id_utente')
-        //     ->select('utentes.*')
-        //     ->orderByRaw('ISNULL(consultas.id), consultas.created_at ASC')
-        //     ->get();
-        // $utentes = Utente::leftJoin('consultas', 'utentes.id', '=', 'consultas.id_utente')
-        //     ->select('utentes.*')
-        //     ->orderByRaw('ISNULL(consultas.id) DESC, utentes.created_at DESC')
-        //     ->get();
-        // $utentes = Utente::leftJoin('consultas', 'utentes.id', '=', 'consultas.id_utente')
-        //     ->leftJoin('consultasmedicas', 'consultas.id', '=', 'consultasmedicas.id_consulta')
-        //     ->select('utentes.*')
-        //     ->orderByRaw('ISNULL(consultas.id) DESC, ISNULL(consultasmedicas.id) DESC, utentes.created_at DESC')
-        //     ->get();
 
         $utentes = Utente::leftJoin('consultas', 'utentes.id', '=', 'consultas.id_utente')
             ->leftJoin('consultasmedicas', 'consultas.id', '=', 'consultasmedicas.id_consulta')
@@ -66,12 +52,6 @@ class UtenteController extends Controller
             ->orderByRaw('ISNULL(consultas.id) DESC, ISNULL(consultasmedicas.id) DESC, 
                 consultasmedicas.created_at DESC, utentes.created_at DESC')
             ->get();
-
-
-        // $consultas = Consulta::whereNotNull('created_at')->get();
-        // $consultas = Consulta::all();
-        // determinar condições no acesso à bd
-        // $utentes = Utente::where('id', 1)->get();
 
         return view('homeutente', ['utentes' => $utentes]);
     }
@@ -98,9 +78,7 @@ class UtenteController extends Controller
 
         $utente->save();
 
-        return redirect()->route('homeutente');
-
-       
+        return redirect()->route('homeutente');      
     }
 
     public function edit_utente($id){
@@ -108,8 +86,6 @@ class UtenteController extends Controller
         $utente = Utente::find($id);
 
         return view('edit_utente', ['utente' => $utente]);
-
-
     }
 
     public function edit_utente_submit(UtenteRequestUpdate $request){
@@ -136,14 +112,6 @@ class UtenteController extends Controller
         return redirect()->route('homeutente');
     }
         
-    // public function delete_utente($id){
-
-    //     $utente=Utente::find($id);
-    //     $utente->delete();
-    //     return redirect()->route('homeutente');
-        
-    // }
-
     public function delete_utente($id){
 
         $utente = Utente::find($id);
@@ -162,71 +130,8 @@ class UtenteController extends Controller
         }
     }
 
-    // public function ver_consulta($id)
-    // {
-    //     // Buscar o utente pelo ID
-    //     $utente = Utente::find($id);
-        
-    //     if ($utente) {
-    //         // Obter a primeira consulta associada ao utente
-    //         $consulta = $utente->consultas->first();
-    //         //dd($consulta);
-    //         if ($consulta) {
-    //             // Obter as consultas médicas considerando os registros excluídos
-    //             $consultaMedica = $consulta->consultas_medicas()->withTrashed()->get();
-    //             //dd($consultaMedica);
-    //             return view('consulta_medica', ['utente' => $utente, 'consulta' => $consulta, 'consultasMedica' => $consultaMedica]);
-    //         } else {
-    //             // Lidar com o caso em que o utente não tem consultas
-    //             // Por exemplo, redirecionar para uma página de erro ou retornar uma mensagem
-    //         }
-    //     } else {
-    //         // Lidar com o caso em que o utente não é encontrado
-    //         // Por exemplo, redirecionar para uma página de erro ou retornar uma mensagem
-    //     }
-    // }
-    
-    
-    // public function registar_consulta($id)
-    // {
-    //     $utente = Utente::find($id);
-        
-        
+    public function registar_consulta($id){
 
-    //     if($utente->consultas->isNotEmpty()){
-    //         $consultas = $utente->consultas;
-    //         return view('ver_consulta', ['utente' => $utente, 'consultas' => $consultas]); 
-    //     }else{
-    //         return view('registar_consulta', ['utente' => $utente]);
-    //     }
-              
-    // }
-
-        
-    // public function registar_consulta($id)
-    // {
-    //     $utente = Utente::find($id);
-    //     $consulta = $utente->consultas;
-        
-    //     if($consulta->isNotEmpty()){
-
-    //         return view('ver_consulta', ['utente' => $utente, 'consultas' => $consulta]); 
-
-    //     }elseif($consulta->consultas_medicas->isNotEmpty()){
-
-    //         $consultaMedica = $utente->consultas->consultas_medicas;
-
-    //         return view('consulta_medica', ['utente' => $utente, 'consulta' => $consulta, 'consultasMedica' => $consultaMedica]);
-
-    //     }else{
-
-    //         return view('registar_consulta', ['utente' => $utente]);
-    //     }
-              
-    // }
-
-    public function registar_consulta($id)
-    {
         $utente = Utente::find($id); // Encontrar o utente pelo ID
         $consultas = $utente->consultas; // Obter as consultas associadas a este utente
         $consultasMedicas = [];
@@ -254,9 +159,6 @@ class UtenteController extends Controller
             return view('registar_consulta', ['utente' => $utente]);
         }
     }
-
-
-
 
     public function registar_consulta_submit(Request $request){
         
@@ -291,8 +193,7 @@ class UtenteController extends Controller
         $terapeutica = $request->input('terapeutica');
         $dosagem = $request->input('dosagem');
         $periodicidade = $request->input('periodicidade');
-        $comentarios = $request->input('comentarios');
-        
+        $comentarios = $request->input('comentarios');     
         
         $consulta = new ConsultaMedica();
         $consulta->id_consulta = $id;
@@ -300,7 +201,6 @@ class UtenteController extends Controller
         $consulta->dosagem = $dosagem;
         $consulta->periodicidade = $periodicidade;
         $consulta->comentarios = $comentarios;
-        
         
         $consulta->save();
         

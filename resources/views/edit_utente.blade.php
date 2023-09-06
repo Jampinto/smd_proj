@@ -11,9 +11,7 @@
             <hr>
             <form action="{{route('edit_utente_submit')}}" method="post">
                 @csrf
-
                 <input type="hidden" name="id_utente" value="{{$utente->id}}">
-
                 <div class="row">
                     <div class="col-sm-4 offset-sm-4">
                         <div class="form-group">
@@ -30,7 +28,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
             @if($errors->any())
             <div class="alert alert-danger col-sm-4 offset-sm-4">
@@ -41,10 +38,7 @@
                 </ul>
             </div>
             @endif
-            {{-- "invalid-feedback col-sm-4 offset-sm-4"
-            alert alert-danger --}}
         </div>
     </div>
 </div>
-
 @endsection

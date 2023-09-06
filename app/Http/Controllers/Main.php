@@ -24,17 +24,6 @@ class Main extends Controller
             return redirect()->route('login');
         }
 
-
-        // $c = new Nossaclasse();
-        // $c->testar();
-        // if($c->checkSession())
-        // {
-        //     return redirect()->route('home');
-        // }
-        // else
-        // {
-        //     return redirect()->route('login');
-        // }
     }
 
     //=================================================================================
